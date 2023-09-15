@@ -1,5 +1,5 @@
 {
-  "name": "auther",
+  "name": "autheer",
   "version": "1.0.1",
   "description": "An NPM package for user authentication",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kizomanizo/auther.git"
+    "url": "git+ssh://git@github.com/kizomanizo/autheer.git"
   },
   "keywords": [
     "auther",
@@ -22,17 +22,17 @@
   "author": "Kizito Mrema",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kizomanizo/auther/issues"
+    "url": "https://github.com/kizomanizo/autheer/issues"
   },
-  "homepage": "https://github.com/kizomanizo/auther#readme",
+  "homepage": "https://github.com/kizomanizo/autheer#readme",
   "type": "commonjs",
   "devDependencies": {
-    "bcrypt": "^5.1.1",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1"
   }
 }
