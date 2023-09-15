@@ -17,7 +17,7 @@ Before you begin to use the package, you have to create a file named .env on the
 
 For example, for a fresh application called _my_app_ and add a .env file in it, you can use the following command:
 
-`mkdir my_app && cd my_app && touch .env && touch users.json && echo "[]" users.json`
+`mkdir my_app && cd my_app && touch .env && touch users.json && echo "[]" > users.json`
 
 In the .env file. the following enviroment variables are required and should remain confidential. Remember to add .env file to your .gitignore if you use GIT.
 
