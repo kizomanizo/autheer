@@ -2,4 +2,4 @@ node_modules
 .env
 *.rest
 app.js
-lib/apiHelper.js
+lib/apihelper.js
