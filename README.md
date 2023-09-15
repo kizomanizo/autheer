@@ -17,15 +17,9 @@ Before you begin to use the package, you have to create a file named .env on the
 
 For example, for a fresh application called _my_app_ and add a .env file in it, you can use the following command:
 
-`mkdir my_app && cd my_app && touch .env`
+`mkdir my_app && cd my_app && touch .env && touch users.json && echo "[]" users.json`
 
 In the .env file. the following enviroment variables are required and should remain confidential. Remember to add .env file to your .gitignore if you use GIT.
-
-| KEY          | VALUE                                                            |
-| ------------ | ---------------------------------------------------------------- | --- |
-| JWT_SECRET   | Any short word used to encrypt your token e.g. _Top53cre7_       |
-| TOKEN_EXPIRY | The time after which the token will expire e.g. _"2d"_ or _"1w"_ |     |
-| PORT         | The port that your app will run at. e.g. _3003_                  |
 
 A completedn .env file can look like:
 
@@ -45,7 +39,7 @@ Create a new express app (or any other), for a quick node app you can use the in
 
 Respond to all the questions then install express and all of this app dependencies using:
 
-`npm install express`
+`npm install express jsonwebtoken bcrypt dotenv`
 
 Once that is done you can create a file called index.js and use any editor to open it. In the editor create a basic Express application like so:
 
@@ -57,13 +51,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 const port = process.env.PORT;
 
-const {
-  authenticateToken,
-  loginUser,
-  registerUser,
-  getUsers,
-  saveUsers,
-} = require("./lib/middleware");
+const { authenticateToken, loginUser, registerUser, getUsers, saveUsers } = require("autheer");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
