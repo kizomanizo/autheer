@@ -4,8 +4,7 @@
   "description": "An NPM package for user authentication",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "start:dev": "npx nodemon --ignore users.json app.js"
+    "test": "test"
   },
   "repository": {
     "type": "git",
