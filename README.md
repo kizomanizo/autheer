@@ -17,9 +17,9 @@ Before you begin to use the package, you have to create a file named .env on the
 
 For example, for a fresh application called _my_app_ and add a .env file in it, you can use the following command:
 
-`mkdir my_app && cd my_app && touch .env && touch users.json && echo "[]" > users.json`
+`mkdir my_app && cd my_app && touch .env && echo "# .env file\n\nJWT_SECRET=Top53cre7\nTOKEN_EXPIRY="2d"\nPORT=3003" > .env && touch users.json && echo "[]" > users.json && touch .gitignore && echo "node_modules\n.env\nusers.json" > .gitignore`
 
-In the .env file. the following enviroment variables are required and should remain confidential. Remember to add .env file to your .gitignore if you use GIT.
+This command will create a folder called my_app (Change it to whatever you need to call your app), add a .env file in it, add JWT secret and its expiry and the node port to the .env, it will also create an empty users.json file for you. You only need to change the secret in the .env to another secret and add token expiry to something suitable for you e.g. 2d, 1h, 3y, 3w etc. The command will also add a .gitignore file and add node_modules folder, .env file and users.json file in it to prevent them from being commited to a GIT repo.
 
 A completedn .env file can look like:
 
@@ -33,11 +33,11 @@ PORT=3003
 
 ### Creating A new App
 
-Create a new express app (or any other), for a quick node app you can use the initialization command.
+Create a new express app (or any other), for a quick node app, once inside the my_app directory above; you can use the initialization command.
 
 `npm init`
 
-Respond to all the questions then install express and all of this app dependencies using:
+Respond to all the questions then install Express and all of this app dependencies using:
 
 `npm install express jsonwebtoken bcrypt dotenv`
 
@@ -79,7 +79,8 @@ app.post("/users/initialize", async (req, res) => {
       message: newUser,
     });
   } catch (error) {
-    return apihelper.failure(req, res, 500, error.message);
+    console.error(error.message);
+    return "Error in initializing";
   }
 });
 ```
