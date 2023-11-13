@@ -21,12 +21,13 @@ require("dotenv").config();
  * @throws {Error} - If there's an error during token verification.
  */
 function authenticateToken(request) {
-  const token = request.headers.authorization;
+  const bearer = request.headers.authorization;
+  const token = bearer.split(" ")[1];
   if (!token) {
     throw new Error("Access denied, invalid token");
   } else {
     try {
-      const verified = jwt.verify(token, process.env.JWT_SECRET);
+      const verified = jwt.verify(token, process.env["JWT_SECRET"]);
       return verified;
     } catch (error) {
       throw new Error("Error authenticating token: " + error.message);
@@ -66,15 +67,15 @@ async function loginUser(email, password) {
  * @throws {Error} - If there's an error during user registration.
  */
 async function registerUser(email, password) {
-  const existingUser = users.find((u) => u.email === email);
-  if (existingUser) {
-    throw new Error("User already exists");
-  }
   try {
+    const existingUser = users.find((u) => u.email === email);
+    if (existingUser) {
+      throw new Error("User already exists");
+    }
     const id = crypto.randomUUID();
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    users.push({ id, email, password: hashedPassword, active: true });
+    users.push({ id, email, password: hashedPassword, isActive: true });
     saveUsers(users);
 
     const newUser = users.find((u) => u.id === id);
@@ -119,10 +120,4 @@ function saveUsers(users) {
   }
 }
 
-module.exports = {
-  authenticateToken,
-  loginUser,
-  registerUser,
-  getUsers,
-  saveUsers,
-};
+module.exports = { authenticateToken, loginUser, registerUser, getUsers, saveUsers };

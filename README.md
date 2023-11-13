@@ -21,7 +21,7 @@ For example, for a fresh application called _my_app_ and add a .env file in it, 
 
 This command will create a folder called my_app (Change it to whatever you need to call your app), add a .env file in it, add JWT secret and its expiry and the node port to the .env, it will also create an empty users.json file for you. You only need to change the secret in the .env to another secret and add token expiry to something suitable for you e.g. 2d, 1h, 3y, 3w etc. The command will also add a .gitignore file and add node_modules folder, .env file and users.json file in it to prevent them from being commited to a GIT repo.
 
-A completedn .env file can look like:
+A completed `.env` file can look like:
 
 ```env
 # .env file
@@ -161,7 +161,7 @@ To use this route, you have to access the endpoint http://localhost:3003/users/r
 }
 ```
 
-And add a Header called Authorization with content being the token that you received from the LOGIN route. e.g. _"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaWQiOiIxOGIwMjJmZi1lMWI0LTQ0ZjUtYTcwNC1iZmYzNDViNDU3OWEiLCJpYXQiOjE2OTQ3OTg2NDUsImV4cCI6MTY5NDk3MTQ0NX0.NS3n8i7EL8xfj_XlhSy3kviChvWI7gdo3El_S9-eCoY"_
+And add a Header called Authorization with content being the word 'Bearer' and the token that you received from the LOGIN route. e.g. _"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaWQiOiIxOGIwMjJmZi1lMWI0LTQ0ZjUtYTcwNC1iZmYzNDViNDU3OWEiLCJpYXQiOjE2OTQ3OTg2NDUsImV4cCI6MTY5NDk3MTQ0NX0.NS3n8i7EL8xfj_XlhSy3kviChvWI7gdo3El_S9-eCoY"_ separated by a single space.
 
 If it is successfull, you will get a response that shows you the success and the created user details:
 
@@ -178,7 +178,7 @@ If it is successfull, you will get a response that shows you the success and the
 
 ### Find a specific user
 
-Autheer can help you to find a specific user by using the user ID, this needs you to send a GET request to `localhost:3003/users/user-id-here` and use the following code for your find user route:
+Autheer can help you to find a specific user by using the user ID, this needs you to send a GET request to `localhost:3003/users/user-id-here` with the same Authorization header as the REGISTER above and use the following code for your find user route:
 
 ```javascript
 // Find a specific user
@@ -213,7 +213,7 @@ If a user exists, this will return a success status and a message that contains 
 
 ### Update a User
 
-To update a user, the following route needs to be put in your index.js below the register route:
+To update a user, use the Authorization header as shown in REGISTER example and the following route needs to be put in your index.js below the register route:
 
 ```javascript
 // Update user details
@@ -334,7 +334,7 @@ app.delete("/users/:id", async (req, res) => {
 });
 ```
 
-The response will show you if the request was successfull and the ID of the just deleted user in case you want to keep records. The response will look like:
+When requested from an app or browser, this route also needs the Authorization header as shown in REGISTER example above and the response will show you if the request was successfull and the ID of the just deleted user in case you want to keep records. The response will look like:
 
 ```json
 {

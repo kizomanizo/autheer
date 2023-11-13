@@ -8,10 +8,4 @@
 
 const { authenticateToken, loginUser, registerUser, getUsers, saveUsers } = require("./middleware");
 
-module.exports = {
-  authenticateToken,
-  loginUser,
-  registerUser,
-  getUsers,
-  saveUsers,
-};
+module.exports = { authenticateToken, loginUser, registerUser, getUsers, saveUsers };
