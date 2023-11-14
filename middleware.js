@@ -1,6 +1,6 @@
 /**
  * @module Autheer Middleware
- * @version 1.1.0
+ * @version 1.1.1
  * @description A set of authentication and user management functions
  *   designed to simplify user authentication and authorization in Node.js
  *   applications.
