@@ -41,7 +41,7 @@ Create a new express app (or any other), for a quick node app, once inside the m
 
 Respond to all the questions then install Express and all of this app dependencies using:
 
-`npm install express jsonwebtoken bcrypt dotenv`
+`npm install express autheer jsonwebtoken bcrypt dotenv`
 
 Before embarking on code editing, you need to tell NodeJS that you are going to use ES6 convention to write your app, instead of using `require(module-x-or-y)` to import your libraries, you will be using `import { blah, bleh } from "module-x-or-y"`. To do that, you need to add a line that reads `"type": "module"` in your _package.json_ in the root scope preferably just below 'description'. For example, a package.json first few lines may look like:
 
