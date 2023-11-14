@@ -1,23 +1,29 @@
 /**
  * @module Autheer Middleware
  * @version 1.0.0
- * @description A set of authentication and user management functions designed to simplify user authentication and authorization in Node.js applications.
+ * @description A set of authentication and user management functions
+ *   designed to simplify user authentication and authorization in Node.js
+ *   applications.
  * @author Kizito S.M.
  * @email kizomanizo@gmail.com
  */
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const fs = require("fs");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import fs from "fs";
+import { randomUUID } from "crypto";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const users = getUsers() || "No users found";
-const crypto = require("crypto");
-require("dotenv").config();
 
 /**
  * Authenticate a user based on a JWT token.
  *
  * @param {Object} request - The request object containing headers.
- * @returns {Object|boolean} - The verified user object or false if authentication fails.
+ * @returns {Object|boolean} - The verified user object or false if
+ *   authentication fails.
  * @throws {Error} - If there's an error during token verification.
  */
 function authenticateToken(request) {
@@ -27,7 +33,7 @@ function authenticateToken(request) {
     throw new Error("Access denied, invalid token");
   } else {
     try {
-      const verified = jwt.verify(token, process.env["JWT_SECRET"]);
+      const verified = jwt.verify(token, process.env.JWT_SECRET);
       return verified;
     } catch (error) {
       throw new Error("Error authenticating token: " + error.message);
@@ -40,8 +46,8 @@ function authenticateToken(request) {
  *
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
- * @returns {boolean|string} - True for successful authentication, false for failed authentication,
- *                            or an error message in case of an error.
+ * @returns {boolean|string} - True for successful authentication, false for
+ *   failed authentication, or an error message in case of an error.
  */
 async function loginUser(email, password) {
   const user = users.find((u) => u.email === email);
@@ -63,7 +69,8 @@ async function loginUser(email, password) {
  *
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
- * @returns {Object|string} - The registered user object or an error message if registration fails.
+ * @returns {Object|string} - The registered user object or an error message if
+ *   registration fails.
  * @throws {Error} - If there's an error during user registration.
  */
 async function registerUser(email, password) {
@@ -72,7 +79,7 @@ async function registerUser(email, password) {
     if (existingUser) {
       throw new Error("User already exists");
     }
-    const id = crypto.randomUUID();
+    const id = randomUUID();
     const hashedPassword = bcrypt.hashSync(password, 10);
 
     users.push({ id, email, password: hashedPassword, isActive: true });
@@ -90,7 +97,8 @@ async function registerUser(email, password) {
 /**
  * Get the list of registered users from the local JSON file.
  *
- * @returns {Array|Object|string} - The list of registered users, an error message, or an empty array.
+ * @returns {Array|Object|string} - The list of registered users, an error
+ *   message, or an empty array.
  * @throws {Error} - If there's an error reading the user data file.
  */
 function getUsers() {
@@ -108,7 +116,8 @@ function getUsers() {
  * Save the updated user list to the local JSON file after registration.
  *
  * @param {Array} users - The updated user list.
- * @returns {string|Error} - A success message or an error message if the operation fails.
+ * @returns {string|Error} - A success message or an error message if the
+ *   operation fails.
  */
 function saveUsers(users) {
   try {
@@ -120,4 +129,11 @@ function saveUsers(users) {
   }
 }
 
-module.exports = { authenticateToken, loginUser, registerUser, getUsers, saveUsers };
+// prettier-ignore
+export {
+  authenticateToken,
+  loginUser,
+  registerUser,
+  getUsers,
+  saveUsers,
+};

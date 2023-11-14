@@ -2,6 +2,8 @@
 
 Autheer is a Node.js authentication package that simplifies user authentication using JWT tokens and provides methods for user registration and login. You do not need to create auth logic everytime you are creating a NodeJS application, just import _autheer_ and you are good to go.
 
+**NOTE: This version now uses and needs ES6 convention, remember to change your requires to imports** 😔
+
 ## Installation
 
 To install Autheer, use npm:
@@ -41,17 +43,34 @@ Respond to all the questions then install Express and all of this app dependenci
 
 `npm install express jsonwebtoken bcrypt dotenv`
 
+Before embarking on code editing, you need to tell NodeJS that you are going to use ES6 convention to write your app, instead of using `require(module-x-or-y)` to import your libraries, you will be using `import { blah, bleh } from "module-x-or-y"`. To do that, you need to add a line that reads `"type": "module"` in your _package.json_ in the root scope preferably just below 'description'. For example, a package.json first few lines may look like:
+
+```json
+{
+  "name": "use-autheer",
+  "version": "1.0.0",
+  "description": "A simple tool to showcase how to use Autheer NPM package.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test"
+  }...
+}
+```
+
 Once that is done you can create a file called index.js and use any editor to open it. In the editor create a basic Express application like so:
 
 ```javascript
-const express = require("express");
-const app = express();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-require("dotenv").config();
-const port = process.env.PORT;
+import express from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import { authenticateToken, loginUser, registerUser, getUsers, saveUsers } from "autheer";
 
-const { authenticateToken, loginUser, registerUser, getUsers, saveUsers } = require("autheer");
+dotenv.config();
+
+const app = express();
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -353,4 +372,4 @@ Kizito S.M.
 
 # Version
 
-1.0.2
+1.1.0
