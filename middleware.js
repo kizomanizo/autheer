@@ -33,7 +33,7 @@ function authenticateToken(request) {
     throw new Error("Access denied, invalid token");
   } else {
     try {
-      const verified = jwt.verify(token, process.env.JWT_SECRET);
+      const verified = jwt.verify(token, process.env["JWT_SECRET"]);
       return verified;
     } catch (error) {
       throw new Error("Error authenticating token: " + error.message);
@@ -74,8 +74,8 @@ async function loginUser(email, password) {
  * @throws {Error} - If there's an error during user registration.
  */
 async function registerUser(email, password) {
+  const existingUser = users.find((u) => u.email === email);
   try {
-    const existingUser = users.find((u) => u.email === email);
     if (existingUser) {
       throw new Error("User already exists");
     }
